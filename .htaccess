@@ -1,0 +1,16 @@
+# do not allow anyone else to read your .htaccess file
+<Files .htaccess>
+deny from all
+</Files>
+
+# forbid viewing of directories
+Options All -Indexes
+
+# hide this list of files from being seen when listing a directory
+IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti*
+
+# disable the server signature- helps with preformance
+ServerSignature Off
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
